@@ -14,7 +14,6 @@
 @interface AddItemViewController ()
 @property(weak, nonatomic) IBOutlet UITextField *addItemField;
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-
 @end
 
 @implementation AddItemViewController
