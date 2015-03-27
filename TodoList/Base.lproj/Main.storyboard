@@ -41,6 +41,7 @@
                     <navigationItem key="navigationItem" title="My ToDo List" id="ecV-Ck-5Uf">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ubq-vW-Stj">
                             <connections>
+                                <action selector="new:" destination="FbA-jS-QRu" id="foe-g4-a2d"/>
                                 <segue destination="evn-QF-ifZ" kind="presentation" id="y5i-0f-mhg"/>
                             </connections>
                         </barButtonItem>

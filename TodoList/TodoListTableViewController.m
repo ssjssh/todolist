@@ -11,7 +11,6 @@
 #import "AddItemViewController.h"
 
 @interface TodoListTableViewController ()
-
 @end
 
 @implementation TodoListTableViewController
@@ -32,17 +31,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 10;
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return [self.toDoItems count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"ListPrototypeCell";
-    UITableViewCell *result = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    UITableViewCell *result =
+            [tableView dequeueReusableCellWithIdentifier:cellIdentifier
+                                            forIndexPath:indexPath];
     ToDoItem *item = self.toDoItems[(NSUInteger) indexPath.row];
     result.textLabel.text = item.itemName;
     if (item.completed) {
@@ -53,11 +56,25 @@
     return result;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)      tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     ToDoItem *tapped_item = self.toDoItems[(NSUInteger) indexPath.row];
     tapped_item.completed = !tapped_item.completed;
-    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [tableView reloadRowsAtIndexPaths:@[indexPath]
+                     withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void) tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //必须先删除列表中的元素，因为后面的delete中会刷新，也就意味着会调用  numberOfRowsInSection
+        //这样就会发现界面的row数和控制器的row数不一致。
+        [self.toDoItems removeObjectAtIndex:(NSUInteger) indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                              withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue {
@@ -78,13 +95,5 @@
     [self.toDoItems addObject:item3];
     ToDoItem *item4 = [ToDoItem createItem:@"read book"];
     [self.toDoItems addObject:item4];
-
-
-    for (int i=0; i<1000; i++) {
-        ToDoItem *item =[ToDoItem createItem:@"i"];
-        [self.toDoItems addObject:item];
-    }
-
-
 }
 @end
