@@ -6,10 +6,8 @@
 //  Copyright (c) 2015 沈世军. All rights reserved.
 //
 
-
 #import "AddItemViewController.h"
 #import "ToDoItem.h"
-
 
 @interface AddItemViewController ()
 @property(weak, nonatomic) IBOutlet UITextField *addItemField;
@@ -18,14 +16,15 @@
 
 @implementation AddItemViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.doneButton.enabled = NO;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if (sender != self.doneButton)return;
+    if (sender != self.doneButton)
+        return;
     if (self.addItemField.text.length > 0) {
         self.toDoItem = [ToDoItem createItem:self.addItemField.text];
     }
@@ -36,7 +35,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)restoreDefaults:(id)sender {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.addItemField becomeFirstResponder];
+}
+
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
+    NSString *newText =
+    [textField.text stringByReplacingCharactersInRange:range
+                                            withString:string];
+    self.doneButton.enabled = [newText length] > 0;
+    return YES;
 }
 
 @end

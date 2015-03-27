@@ -6,14 +6,11 @@
 //  Copyright (c) 2015 沈世军. All rights reserved.
 //
 
-
 #import <UIKit/UIKit.h>
 
 @class ToDoItem;
 
-
-@interface AddItemViewController : UIViewController
-- (IBAction)restoreDefaults:(id)sender;
+@interface AddItemViewController : UIViewController <UITextFieldDelegate>
 
 @property ToDoItem *toDoItem;
 

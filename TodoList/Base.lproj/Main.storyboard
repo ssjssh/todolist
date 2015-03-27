@@ -66,18 +66,41 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="new to do item" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nh9-37-Ydx">
                                 <rect key="frame" x="54" y="86" width="302" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="54" y="89" width="230" height="30"/>
-                                </variation>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="BLo-bG-KDx"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="nh9-37-Ydx" secondAttribute="trailing" constant="28" id="Uex-3N-doE"/>
+                            <constraint firstItem="nh9-37-Ydx" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="25" id="ZHd-Dx-dsM"/>
                             <constraint firstItem="nh9-37-Ydx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="38" id="keV-es-e5c"/>
+                            <constraint firstItem="nh9-37-Ydx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="38" id="lnF-hG-Rt5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nh9-37-Ydx" secondAttribute="trailing" constant="100" id="wrw-VR-h1o"/>
                             <constraint firstItem="nh9-37-Ydx" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="69" id="zJE-37-KMf"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="enabled" value="NO"/>
+                        </userDefinedRuntimeAttributes>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Uex-3N-doE"/>
+                                <exclude reference="ZHd-Dx-dsM"/>
+                                <exclude reference="lnF-hG-Rt5"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="Uex-3N-doE"/>
+                                <include reference="ZHd-Dx-dsM"/>
+                                <exclude reference="keV-es-e5c"/>
+                                <include reference="lnF-hG-Rt5"/>
+                                <exclude reference="wrw-VR-h1o"/>
+                                <exclude reference="zJE-37-KMf"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add New Item" id="khf-3N-cUn">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hya-rA-7PR">
